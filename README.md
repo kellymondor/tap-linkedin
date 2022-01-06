@@ -17,7 +17,7 @@ source ~/.virtualenvs/tap-linkedin/bin/activate
 pip install -e .
 ```
 
-### Create the configuration file
+### Get the necessary credentials
 
 
 ### Create the configuration file
