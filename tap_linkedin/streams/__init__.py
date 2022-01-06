@@ -1,0 +1,2 @@
+import tap_linkedin.streams.company_stream
+import tap_linkedin.streams.people_stream

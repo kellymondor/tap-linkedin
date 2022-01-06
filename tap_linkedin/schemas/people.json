@@ -1,0 +1,22 @@
+{
+    "type": ["null", "object"],
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": ["null", "string"]
+      },
+      "fullName": {
+        "type": ["null", "string"]
+      },
+      "firstName": {
+        "type": ["null", "string"],
+        "format": "date-time"
+      },
+      "lastName": {
+        "type": ["null", "string"]
+      },
+      "companyUrn": {
+        "type": ["null", "string"]
+      }
+    }
+  }

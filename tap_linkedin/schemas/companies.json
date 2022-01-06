@@ -1,0 +1,36 @@
+{
+    "type": ["null", "object"],
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": ["null", "string"]
+      },
+      "description": {
+        "type": ["null", "string"]
+      },
+      "industry": {
+        "type": ["null", "string"]
+      },
+      "employee_count": {
+        "type": ["null", "string"]
+      },
+      "revenue": {
+        "type": ["null", "string"]
+      },
+      "flagshipCompanyUrl": {
+        "type": ["null", "string"]
+      },
+      "website": {
+        "type": ["null", "string"]
+      },
+      "headquarters": {
+        "type": ["null", "string"]
+      },
+      "name": {
+        "type": ["null", "string"]
+      },
+      "geoRegion": {
+        "type": ["null", "string"]
+      }
+    }
+  }
