@@ -1,45 +1,15 @@
 {
-    "type": ["null", "object"],
-    "additionalProperties": true,
-    "properties": {
-      "id": {
-        "type": ["null", "integer"]
-      },
-      "fullName": {
-        "type": ["null", "string"]
-      },
-      "firstName": {
-        "type": ["null", "string"]
-      },
-      "lastName": {
-        "type": ["null", "string"]
-      },
-      "companyUrn": {
-        "type": ["null", "string"]
-      },
-      "memorialized": {
-        "type": ["null", "boolean"]
-      },
-      "objectUrn": {
-        "type": ["null", "string"]
-      },
-      "geoRegion": {
-        "type": ["null", "string"]
-      },
-      "saved": {
-        "type": ["null", "boolean"]
-      },
-      "openLink": {
-        "type": ["null", "boolean"]
-      },
-      "premium": {
-        "type": ["null", "boolean"]
-      },
-      "location": {
-        "type": ["null", "string"]
-      },
-      "summary": {
-        "type": ["null", "string"]
-      }
+  "type": [
+    "null", 
+    "object"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": [
+        "null",
+        "integer"
+      ]
     }
   }
+}
