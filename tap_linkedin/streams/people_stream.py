@@ -30,18 +30,19 @@ class PeopleStream(BaseStream):
         records = response.get('elements')
         
         for record in records:
-            record["id"] = int(record.get("objectUrn").replace("urn:li:member:", ""))
-            self.write_record(record, time_extracted)
+            r = {}
+            r["id"] = int(record.get("objectUrn").replace("urn:li:member:", ""))
+            self.write_record(r, time_extracted)
             
-            if record.get("currentPositions", None):
-                for companies in record.get("currentPositions"):
-                    if companies.get("companyUrn", None):
-                        PeopleStream.company_ids.add(int(companies["companyUrn"].replace("urn:li:fs_salesCompany:", "")))
+            # if record.get("currentPositions", None):
+            #     for companies in record.get("currentPositions"):
+            #         if companies.get("companyUrn", None):
+            #             PeopleStream.company_ids.add(int(companies["companyUrn"].replace("urn:li:fs_salesCompany:", "")))
             
-            if record.get("pastPositions", None):
-                for companies in record.get("pastPositions"):
-                    if companies.get("companyUrn", None):
-                        PeopleStream.company_ids.add(int(companies["companyUrn"].replace("urn:li:fs_salesCompany:", "")))
+            # if record.get("pastPositions", None):
+            #     for companies in record.get("pastPositions"):
+            #         if companies.get("companyUrn", None):
+            #             PeopleStream.company_ids.add(int(companies["companyUrn"].replace("urn:li:fs_salesCompany:", "")))
         
         start += len(records)
 
