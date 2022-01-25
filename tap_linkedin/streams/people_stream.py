@@ -44,7 +44,6 @@ class PeopleStream(BaseStream):
                         PeopleStream.company_ids.add(int(companies["companyUrn"].replace("urn:li:fs_salesCompany:", "")))
         
         start += len(records)
-        LOGGER.INFO(F"STATE: {start}")
 
         Context.set_bookmark(self.stream_id, self.replication_key, start)
         self.write_state()
@@ -56,7 +55,7 @@ class PeopleStream(BaseStream):
 
     def sync_records(self, **kwargs):
 
-        start = Context.get_bookmark(self.stream_id).get(self.replication_key, 0)
+        start = Context.get_bookmark(PeopleStream.stream_id).get(PeopleStream.replication_key, 0)
         self.write_state()
 
         url = self.client.get_people_search_url(kwargs.get("company_size"), kwargs.get("region"), kwargs.get("years_of_experience"), kwargs.get("tenure"))

@@ -75,7 +75,7 @@ def sync(client, config):
 
 def get_facet_combinations():
     # create all combinations for searching sales nav
-    # this allows us to segment search results and capture as many as possible
+    # this allows us to segment search results and capture as many as possible without overlapping
     facets = []
     facets.append(list(REGIONS.values()))
     facets.append(list(YEARS_OF_EXPERIENCE.values()))
@@ -87,7 +87,7 @@ def get_facet_combinations():
     # this will allow us to start up the sync again in the right spot in case it stops
     combo_list = {}
 
-    # loop through with company_size first to (mostly) avoid getting data for the same company twice
+    # loop through with company_size first to try to avoid getting data for the same company twice
     # we use a set to capture company ids in the company stream context
     for key, value in COMPANY_SIZE.items():
         for idx, combination in enumerate(facet_combinations):

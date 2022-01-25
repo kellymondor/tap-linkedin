@@ -23,6 +23,7 @@ class CompanyStream(BaseStream):
                 record = self.client.get_request(url)
             except LinkedInNotFoundError as e:
                 # occassionaly a company page will be removed but we don't want that to stop the sync
+                # not sure why this happens, maybe clean up on linkedin's side
                 LOGGER.error(e)
             
             record["id"] = company_id

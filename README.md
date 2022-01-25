@@ -4,6 +4,8 @@
 
 To make this Tap work with a Target, clone both projects and follow these instructions:
 
+NOTE: I am keeping this repo private - scraping LinkedIn is not illegal but I don't want to advertise what we're doing to the world.
+
 ## Usage
 
 This section dives into basic usage of `tap-linkedin` by walking through extracting

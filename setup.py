@@ -10,8 +10,7 @@ setup(name='tap-linkedin',
       install_requires=[
           'backoff==1.8.0',
           'requests==2.20.1',
-          'singer-python==5.12.1',
-          'inflection==0.4.0'
+          'singer-python==5.12.1'
       ],
       entry_points='''
           [console_scripts]
