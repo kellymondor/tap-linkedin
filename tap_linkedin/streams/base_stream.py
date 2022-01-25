@@ -21,9 +21,9 @@ class BaseStream():
         
         schema_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "schemas")
         schema_json = singer.utils.load_json(f"{schema_path}/{self.stream_id}.json")
-        # schema = schema_json
+        schema = Schema.from_dict(schema_json)
         
-        return schema_json
+        return schema
     
     def write_record(self, record, time_extracted):  
         
