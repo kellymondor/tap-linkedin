@@ -16,6 +16,9 @@ setup(name='tap-linkedin',
           [console_scripts]
           tap-linkedin=tap_linkedin:main
       ''',
-      packages=['tap_linkedin'],
+      packages=['tap_linkedin', 'tap_linkedin.streams'],
+      package_data={
+          "schemas": ["tap_linkedin/schemas/*.json"]
+      },
       include_package_data=True,
     )
