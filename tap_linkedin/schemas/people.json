@@ -3,7 +3,7 @@
     "null", 
     "object"
   ],
-  "additionalProperties": true,
+  "additionalProperties": false,
   "properties": {
     "id": {
       "type": [
