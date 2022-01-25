@@ -9,7 +9,7 @@ PAGE_SIZE = 100
 class PeopleStream(BaseStream):
     stream_id = 'people'
     stream_name = 'people'
-    key_properties = ["linkedin_id"]
+    key_properties = ["id"]
     replication_key = "start"
     company_ids = set()
 
@@ -30,19 +30,18 @@ class PeopleStream(BaseStream):
         records = response.get('elements')
         
         for record in records:
-            r = {}
-            r["linkedin_id"] = int(record.get("objectUrn").replace("urn:li:member:", ""))
-            self.write_record(r, time_extracted)
+            record["id"] = int(record.get("objectUrn").replace("urn:li:member:", ""))
+            self.write_record(record, time_extracted)
             
-            # if record.get("currentPositions", None):
-            #     for companies in record.get("currentPositions"):
-            #         if companies.get("companyUrn", None):
-            #             PeopleStream.company_ids.add(int(companies["companyUrn"].replace("urn:li:fs_salesCompany:", "")))
+            if record.get("currentPositions", None):
+                for companies in record.get("currentPositions"):
+                    if companies.get("companyUrn", None):
+                        PeopleStream.company_ids.add(int(companies["companyUrn"].replace("urn:li:fs_salesCompany:", "")))
             
-            # if record.get("pastPositions", None):
-            #     for companies in record.get("pastPositions"):
-            #         if companies.get("companyUrn", None):
-            #             PeopleStream.company_ids.add(int(companies["companyUrn"].replace("urn:li:fs_salesCompany:", "")))
+            if record.get("pastPositions", None):
+                for companies in record.get("pastPositions"):
+                    if companies.get("companyUrn", None):
+                        PeopleStream.company_ids.add(int(companies["companyUrn"].replace("urn:li:fs_salesCompany:", "")))
         
         start += len(records)
 

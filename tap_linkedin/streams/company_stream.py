@@ -8,7 +8,7 @@ LOGGER = singer.get_logger()
 class CompanyStream(BaseStream):
     stream_id = 'companies'
     stream_name = 'companies'
-    key_properties = ["linkedin_id"]
+    key_properties = ["id"]
     replication_key = "id"
     count = 0
 
@@ -26,7 +26,7 @@ class CompanyStream(BaseStream):
                 # not sure why this happens, maybe clean up on linkedin's side
                 LOGGER.error(e)
             
-            record["linkedin_id"] = company_id
+            record["id"] = company_id
             self.write_record(record, time_extracted=time_extracted)
             Context.set_bookmark(self.stream_id, self.replication_key, company_id)
             CompanyStream.count += 1

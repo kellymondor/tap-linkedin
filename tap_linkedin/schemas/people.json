@@ -3,9 +3,9 @@
     "null", 
     "object"
   ],
-  "additionalProperties": false,
+  "additionalProperties": true,
   "properties": {
-    "linkedin_id": {
+    "id": {
       "type": [
         "null",
         "integer"
