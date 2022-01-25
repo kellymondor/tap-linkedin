@@ -5,10 +5,10 @@
   ],
   "additionalProperties": false,
   "properties": {
-    "id": {
+    "linkedin_id": {
       "type": [
         "null",
-        "string"
+        "integer"
       ]
     }
   }

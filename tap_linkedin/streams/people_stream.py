@@ -9,7 +9,7 @@ PAGE_SIZE = 100
 class PeopleStream(BaseStream):
     stream_id = 'people'
     stream_name = 'people'
-    key_properties = ["id"]
+    key_properties = ["linkedin_id"]
     replication_key = "start"
     company_ids = set()
 
@@ -31,7 +31,7 @@ class PeopleStream(BaseStream):
         
         for record in records:
             r = {}
-            r["id"] = int(record.get("objectUrn").replace("urn:li:member:", ""))
+            r["linkedin_id"] = int(record.get("objectUrn").replace("urn:li:member:", ""))
             self.write_record(r, time_extracted)
             
             # if record.get("currentPositions", None):
