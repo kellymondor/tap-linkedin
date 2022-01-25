@@ -3,14 +3,13 @@
     "additionalProperties": true,
     "properties": {
       "id": {
-        "type": ["null", "string"]
+        "type": ["null", "integer"]
       },
       "fullName": {
         "type": ["null", "string"]
       },
       "firstName": {
-        "type": ["null", "string"],
-        "format": "date-time"
+        "type": ["null", "string"]
       },
       "lastName": {
         "type": ["null", "string"]
