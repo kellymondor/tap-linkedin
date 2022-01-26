@@ -11,6 +11,12 @@
         "integer"
       ]
     },
+    "start": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
     "firstName": {
       "type": [
         "null",

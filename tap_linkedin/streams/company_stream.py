@@ -24,13 +24,12 @@ class CompanyStream(BaseStream):
             except LinkedInNotFoundError as e:
                 # occassionaly a company page will be removed but we don't want that to stop the sync
                 # not sure why this happens, maybe clean up on linkedin's side
-                LOGGER.error(e)
+                LOGGER.info(e)
             
             record["id"] = company_id
+            LOGGER.info(f"Getting info for {company_id}")
             self.write_record(record, time_extracted=time_extracted)
             Context.set_bookmark(self.stream_id, self.replication_key, company_id)
             CompanyStream.count += 1
         
         LOGGER.info(f"{CompanyStream.count} companies found using GraphQL.")
-
-Context.stream_objects['companies'] = CompanyStream

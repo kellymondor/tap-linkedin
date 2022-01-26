@@ -12,9 +12,6 @@ LOGGER = singer.get_logger()
 def sync(client, config):
 
     combination_list = get_facet_combinations()
-    
-    people_stream = PeopleStream(client)
-    company_stream = CompanyStream(client)
 
     currently_syncing_stream = Context.state.get('currently_syncing_stream')
     currently_syncing_query = Context.state.get('currently_syncing_query')
@@ -27,7 +24,10 @@ def sync(client, config):
         currently_syncing_query_facet = int(currently_syncing_query_split[1])
 
     if currently_syncing_stream == "companies":
+        company_stream = CompanyStream(client)
         company_stream.sync()
+
+    people_stream = PeopleStream(client)
 
     for key, value in combination_list.items():
         key_split = key.split("-")
@@ -43,6 +43,7 @@ def sync(client, config):
             people_stream.sync(key = key, **value)
         
         if key_facet == 174:
+            company_stream = CompanyStream(client)
             company_stream.sync()
 
 
