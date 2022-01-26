@@ -30,20 +30,12 @@ class PeopleStream(BaseStream):
         response = self.client.get_request(url, params)
         records = response.get('elements')
         
-        for record in records:
+        for idx, record in enumerate(records):
             record["id"] = int(record.get("objectUrn").replace("urn:li:member:", ""))
             record["searchRegion"] = region
-
-            entity_urn = record.get("entityUrn").split(":")[3].split(",")
-            profile_id = entity_urn[0].strip("(")
-            auth_type = entity_urn[1]
-            auth_token = entity_urn[2].strip(")")
-
-            profile_url = self.client.get_person_profile_url(profile_id, auth_type, auth_token)
-            response = self.client.get_request(profile_url)
-            record.update(response)
             
             self.write_record(record, time_extracted)
+            Context.set_bookmark(self.stream_id, self.replication_key, start + idx)
             
             if record.get("currentPositions", None):
                 for companies in record.get("currentPositions"):

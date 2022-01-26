@@ -21,7 +21,8 @@ def discover(client, config):
                 tap_stream_id = stream.stream_id, 
                 stream = stream.stream_name,
                 schema = stream.schema, 
-                key_properties = stream.key_properties))
+                key_properties = stream.key_properties,
+                replication_key = stream.replication_key))
 
     LOGGER.info("Finished discovery.")
 
