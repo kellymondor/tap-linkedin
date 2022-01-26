@@ -10,6 +10,250 @@
         "null",
         "integer"
       ]
+    },
+    "firstName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "lastName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "geoRegion": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "searchRegion": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "entityUrn": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "summary": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "fullName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "currentPositions": {
+      "type": [
+        "null",
+        "array"
+      ],
+      "items": {
+        "type": [
+          "null",
+          "object"
+        ],
+        "properties": {
+          "companyName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "companyUrn": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "tenureAtPosition": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "numYears": {
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "numMonths": {
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              }
+            }
+        },
+        "tenureAtCompany": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "numYears": {
+              "type": [
+                "null",
+                "integer"
+              ]
+            },
+            "numMonths": {
+              "type": [
+                "null",
+                "integer"
+              ]
+            }
+          }
+        },
+        "startedOn": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "month": {
+              "type": [
+                "null",
+                "integer"
+              ]
+            },
+            "year": {
+              "type": [
+                "null",
+                "integer"
+              ]
+            }
+          }
+        },
+        "companyUrnResolutionResult": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "properties": {
+            "entityUrn": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "name": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "industry": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "location": {
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          }
+        } 
+      }
+    }
+  },
+    "pastPositions" : {
+      "type": [
+        "null",
+        "array"
+      ],
+      "items": {
+        "type": [
+          "null",
+          "object"
+        ],
+        "properties": {
+          "endedOn": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "month": {
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "year": {
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              }
+            }
+          },
+          "startedOn": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "month": {
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "year": {
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              }
+            }
+          },
+          "companyName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "companyUrn": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      }
     }
   }
 }

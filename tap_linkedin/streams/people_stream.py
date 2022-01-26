@@ -1,6 +1,7 @@
 import singer
 from .base_stream import BaseStream
 from tap_linkedin.context import Context
+from tap_linkedin.filter_criteria import REGIONS
 
 LOGGER = singer.get_logger()
 
@@ -21,7 +22,7 @@ class PeopleStream(BaseStream):
         else:
             pass
     
-    def sync_page(self, url, page_size, start):
+    def sync_page(self, url, page_size, region, start):
     
         params = {"count": page_size, "start": start}
         time_extracted = singer.utils.now()
@@ -31,6 +32,7 @@ class PeopleStream(BaseStream):
         
         for record in records:
             record["id"] = int(record.get("objectUrn").replace("urn:li:member:", ""))
+            record["search_region"] = region
             self.write_record(record, time_extracted)
             
             if record.get("currentPositions", None):
@@ -59,9 +61,9 @@ class PeopleStream(BaseStream):
         self.write_state()
 
         url = self.client.get_people_search_url(kwargs.get("company_size"), kwargs.get("region"), kwargs.get("years_of_experience"), kwargs.get("tenure"))
-        start = self.sync_page(url, PAGE_SIZE, start)
+        start = self.sync_page(url, PAGE_SIZE, kwargs.get("region"), start)
 
         while start:
-            start = self.sync_page(url, PAGE_SIZE, start)
+            start = self.sync_page(url, PAGE_SIZE, kwargs.get("region"), start)
 
 Context.stream_objects['people'] = PeopleStream
