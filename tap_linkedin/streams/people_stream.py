@@ -32,7 +32,7 @@ class PeopleStream(BaseStream):
         
         for record in records:
             record["id"] = int(record.get("objectUrn").replace("urn:li:member:", ""))
-            record["search_region"] = region
+            record["searchRegion"] = region
             self.write_record(record, time_extracted)
             
             if record.get("currentPositions", None):
@@ -60,10 +60,15 @@ class PeopleStream(BaseStream):
         start = Context.get_bookmark(PeopleStream.stream_id).get(PeopleStream.replication_key, 0)
         self.write_state()
 
-        url = self.client.get_people_search_url(kwargs.get("company_size"), kwargs.get("region"), kwargs.get("years_of_experience"), kwargs.get("tenure"))
-        start = self.sync_page(url, PAGE_SIZE, kwargs.get("region"), start)
+        region = kwargs.get("region")
+        company_size = kwargs.get("company_size")
+        years_of_experience = kwargs.get("years_of_experience")
+        tenure = kwargs.get("tenure")
+
+        url = self.client.get_people_search_url(company_size, region, years_of_experience, tenure)
+        start = self.sync_page(url, PAGE_SIZE, region, start)
 
         while start:
-            start = self.sync_page(url, PAGE_SIZE, kwargs.get("region"), start)
+            start = self.sync_page(url, PAGE_SIZE, region, start)
 
 Context.stream_objects['people'] = PeopleStream
