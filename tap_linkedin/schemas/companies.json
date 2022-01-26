@@ -5,32 +5,86 @@
       "id": {
         "type": ["null", "integer"]
       },
+      "name": {
+        "type": ["null", "string"]
+      },
+      "website": {
+        "type": ["null", "string"]
+      },
+      "location": {
+        "type": ["null", "string"]
+      },
+      "headquarters": {
+        "type": ["null", "object"],
+        "properties": {
+          "country": {
+            "type": ["null", "string"]
+          },
+          "geographicArea": {
+            "type": ["null", "string"]
+          },
+          "city": {
+            "type": ["null", "string"]
+          },
+          "postalCode": {
+            "type": ["null", "string"]
+          },
+          "line1": {
+            "type": ["null", "string"]
+          },
+          "line2": {
+            "type": ["null", "string"]
+          }
+        }
+      },
       "description": {
         "type": ["null", "string"]
       },
       "industry": {
         "type": ["null", "string"]
       },
-      "employee_count": {
+      "employeeCount": {
+        "type": ["null", "integer"]
+      },
+      "employeeCountRange": {
         "type": ["null", "string"]
       },
       "revenue": {
-        "type": ["null", "string"]
+        "type": ["null", "object"],
+        "properties": {
+          "amount": {
+            "type": ["null", "string"]
+          },
+          "currencyCode": {
+            "type": ["null", "string"]
+          }
+        }
+      },
+      "formattedRevenue": {
+        "type": ["null", "object"],
+        "properties": {
+          "amount": {
+            "type": ["null", "integer"]
+          },
+          "unit": {
+            "type": ["null", "string"]
+          },
+          "currencyCode": {
+            "type": ["null", "string"]
+          }
+        }
       },
       "flagshipCompanyUrl": {
         "type": ["null", "string"]
       },
-      "website": {
+      "employeesSearchPageUrl": {
         "type": ["null", "string"]
       },
-      "headquarters": {
+      "type": {
         "type": ["null", "string"]
       },
-      "name": {
-        "type": ["null", "string"]
-      },
-      "geoRegion": {
-        "type": ["null", "string"]
+      "yearFounded": {
+        "type": ["null", "integer"]
       }
     }
   }

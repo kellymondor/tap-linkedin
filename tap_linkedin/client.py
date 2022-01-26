@@ -16,11 +16,15 @@ class LinkedInClient():
     BASE_URL = "https://www.linkedin.com"
 
     PEOPLE_URL_PREFIX = "sales-api/salesApiPeopleSearch?q=peopleSearchQuery"
-    PEOPLE_URL_SUFFIX = """doFetchHeroCard:false,spellCorrectionEnabled:true,spotlightParam:(selectedType:ALL),doFetchFilters:true,doFetchHits:true,doFetchSpotlights:true)&decorationId=com.linkedin.sales.deco.desktop.search.DecoratedPeopleSearchHitResult-10"""
-
+    # PEOPLE_URL_SUFFIX = """doFetchHeroCard:false,spellCorrectionEnabled:true,spotlightParam:(selectedType:ALL),doFetchFilters:true,doFetchHits:true,doFetchSpotlights:true)&decorationId=com.linkedin.sales.deco.desktop.search.DecoratedPeopleSearchHitResult-10"""
+    PEOPLE_URL_SUFFIX = f"""doFetchHeroCard:false,spellCorrectionEnabled:true,spotlightParam:(selectedType:ALL),doFetchFilters:true,doFetchHits:true,doFetchSpotlights:true)&decoration=%28entityUrn%2CobjectUrn%2CcurrentPositions*%2CpastPositions*%29"""
+    
     COMPANY_URL_PREFIX = "sales-api/salesApiCompanies"
     COMPANY_URL_SUFFIX = f"""decoration=%28entityUrn%2Cname%2Cdescription%2Cindustry%2CemployeeCount%2CemployeeDisplayCount%2CemployeeCountRange%2Clocation%2Cheadquarters%2Cwebsite%2Crevenue%2CformattedRevenue%2CemployeesSearchPageUrl%2CflagshipCompanyUrl%29"""
 
+    PERSON_PROFILE_PREFIX = f"sales-api/salesApiProfiles"
+    PERSON_PROFILE_SUFFIX = f"""decoration=%28entityUrn%2CobjectUrn%2CfirstName%2ClastName%2CfullName%2Cheadline%2Clocation%2Cindustry%2CcontactInfo%2Csummary%2CflagshipProfileUrl%2Ceducations*%2Cskills*%29"""
+    
     def __init__(self, config):
         self.keyword = config.get("keyword")
         self.__cookie = config.get("cookie")
@@ -71,6 +75,13 @@ class LinkedInClient():
         query = f"query=(keywords:{self.keyword},companySize:List({company_size}),bingGeo:(includedValues:List((id:{region}))),yearsOfExperience:List({years_of_experience}),tenureAtCurrentCompany:List({tenure})"
         url = f"{self.BASE_URL}/{self.PEOPLE_URL_PREFIX}&{query},{self.PEOPLE_URL_SUFFIX}"
  
+        return url
+
+    def get_person_profile_url(self, profile_id, auth_type, auth_token):
+
+        query = f"(profileId:{profile_id},authType:{auth_type},authToken:{auth_token})"
+        url = f"{self.BASE_URL}/{self.PERSON_PROFILE_PREFIX}/{query}?{self.PERSON_PROFILE_SUFFIX}"
+
         return url
     
     @backoff.on_exception(

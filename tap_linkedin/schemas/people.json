@@ -23,7 +23,13 @@
         "string"
       ]
     },
-    "geoRegion": {
+    "flagshipProfileUrl": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "location": {
       "type": [
         "null",
         "string"
@@ -34,6 +40,72 @@
         "null",
         "string"
       ]
+    },
+    "skills": {
+      "type": [
+        "null",
+        "array"
+      ],
+      "items": {
+        "name": [
+          "null",
+          "object"
+        ],
+        "properties": {
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "numOfEndorsement": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          }
+        }
+      }
+    },
+    "contactInfo": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "socialHandles": {
+          "type": [
+            "null",
+            "array"
+          ],
+          "items": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "properties": {
+              "name": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "type": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "dataSource": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            }
+          }
+        }
+      }
     },
     "entityUrn": {
       "type": [
