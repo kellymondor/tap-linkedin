@@ -27,7 +27,6 @@ class CompanyStream(BaseStream):
                 LOGGER.info(e)
             
             record["id"] = company_id
-            LOGGER.info(f"Getting info for {company_id}")
             self.write_record(record, time_extracted=time_extracted)
             Context.set_bookmark(self.stream_id, self.replication_key, company_id)
             CompanyStream.count += 1

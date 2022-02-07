@@ -35,6 +35,7 @@ def sync(client, config):
         key_facet = int(key_split[1])
         
         if currently_syncing_query and key_company_size <= currently_syncing_query_company_size and key_facet < currently_syncing_query_facet:
+            people_stream.write_state()
             LOGGER.info(f"Skipping sync for: {key}:{value}.")
             continue
         else:

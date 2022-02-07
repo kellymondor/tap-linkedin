@@ -9,8 +9,8 @@ REGIONS = {
 }
 
 COMPANY_SIZE = {
-    'selfemployed': 'A',  
-    '1-10': 'B',
+    # 'selfemployed': 'A',  
+    # '1-10': 'B',
     '11-50': 'C',
     '51-200': 'D',
     '201-500': 'E',
