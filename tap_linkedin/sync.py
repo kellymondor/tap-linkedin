@@ -1,5 +1,8 @@
+from re import L
 import singer
 import itertools
+import time
+import random
 
 from tap_linkedin.streams.people_stream import PeopleStream
 from tap_linkedin.streams.company_stream import CompanyStream
@@ -15,7 +18,10 @@ def sync(client, config):
 
     currently_syncing_stream = Context.state.get('currently_syncing_stream')
     currently_syncing_query = Context.state.get('currently_syncing_query')
+
     
+    LOGGER.info(currently_syncing_stream)
+    LOGGER.info(currently_syncing_query)
     LOGGER.info(f"Starting sync...")
 
     if currently_syncing_query:
@@ -33,20 +39,29 @@ def sync(client, config):
         key_split = key.split("-")
         key_company_size = key_split[0]
         key_facet = int(key_split[1])
-        
-        if currently_syncing_query and key_company_size <= currently_syncing_query_company_size and key_facet < currently_syncing_query_facet:
-            people_stream.write_state()
+
+        if key_company_size < currently_syncing_query_company_size:
             LOGGER.info(f"Skipping sync for: {key}:{value}.")
-            continue
+        elif key_company_size == currently_syncing_query_company_size and key_facet < currently_syncing_query_facet:
+            LOGGER.info(f"Skipping sync for: {key}:{value}.")
         else:
             LOGGER.info(f"Running sync for: {key}:{value}.")
             Context.set_state_property('currently_syncing_query', key)
             people_stream.sync(key = key, **value)
-        
-        if key_facet == 174:
-            company_stream = CompanyStream(client)
-            company_stream.sync()
 
+            if key_facet == 87:
+                sleep()
+        
+            if key_facet == 174:
+                sleep()
+                company_stream = CompanyStream(client)
+                company_stream.sync()
+
+
+def sleep():
+    delay = random.randint(60, 300)
+    LOGGER.info(f"Sleeping for {delay} seconds.")
+    time.sleep(delay)
 
 
 def get_facet_combinations():

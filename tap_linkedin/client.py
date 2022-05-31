@@ -14,11 +14,8 @@ BACKOFF_MAX_TRIES_REQUEST = 5
 class LinkedInClient():
 
     BASE_URL = "https://www.linkedin.com"
-
     PEOPLE_URL_PREFIX = "sales-api/salesApiPeopleSearch?q=peopleSearchQuery"
     PEOPLE_URL_SUFFIX = """doFetchHeroCard:false,spellCorrectionEnabled:true,spotlightParam:(selectedType:ALL),doFetchFilters:true,doFetchHits:true,doFetchSpotlights:true)&decorationId=com.linkedin.sales.deco.desktop.search.DecoratedPeopleSearchHitResult-10"""
-    # PEOPLE_URL_SUFFIX = f"""doFetchHeroCard:false,spellCorrectionEnabled:true,spotlightParam:(selectedType:ALL),doFetchFilters:true,doFetchHits:true,doFetchSpotlights:true)&decoration=%28entityUrn%2CobjectUrn%2CcurrentPositions*%2CpastPositions*%29"""
-    
     COMPANY_URL_PREFIX = "sales-api/salesApiCompanies"
     COMPANY_URL_SUFFIX = f"""decoration=%28entityUrn%2Cname%2Cdescription%2Cindustry%2CemployeeCount%2CemployeeDisplayCount%2CemployeeCountRange%2Clocation%2Cheadquarters%2Cwebsite%2Crevenue%2CformattedRevenue%2CemployeesSearchPageUrl%2CflagshipCompanyUrl%29"""
 
@@ -131,7 +128,7 @@ class LinkedInClient():
             return response
 
         except requests.exceptions.Timeout as err:
-            LOGGER.error(f'TIMEOUT ERROR: {error}')
+            LOGGER.error(f'TIMEOUT ERROR: {err}')
             raise ReadTimeoutError(err)
 
     def get_request(self, url, params=None, json=None, **kwargs):
