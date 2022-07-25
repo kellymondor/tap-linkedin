@@ -14,8 +14,8 @@ BACKOFF_MAX_TRIES_REQUEST = 5
 class LinkedInClient():
 
     BASE_URL = "https://www.linkedin.com"
-    PEOPLE_URL_PREFIX = "sales-api/salesApiPeopleSearch?q=peopleSearchQuery"
-    PEOPLE_URL_SUFFIX = """doFetchHeroCard:false,spellCorrectionEnabled:true,spotlightParam:(selectedType:ALL),doFetchFilters:true,doFetchHits:true,doFetchSpotlights:true)&decorationId=com.linkedin.sales.deco.desktop.search.DecoratedPeopleSearchHitResult-10"""
+    PEOPLE_URL_PREFIX = "sales-api/salesApiLeadSearch?q=searchQuery&query=(spellCorrectionEnabled:true"
+    PEOPLE_URL_SUFFIX = "decorationId=com.linkedin.sales.deco.desktop.searchv2.LeadSearchResult-7"
     COMPANY_URL_PREFIX = "sales-api/salesApiCompanies"
     COMPANY_URL_SUFFIX = f"""decoration=%28entityUrn%2Cname%2Cdescription%2Cindustry%2CemployeeCount%2CemployeeDisplayCount%2CemployeeCountRange%2Clocation%2Cheadquarters%2Cwebsite%2Crevenue%2CformattedRevenue%2CemployeesSearchPageUrl%2CflagshipCompanyUrl%29"""
 
@@ -65,10 +65,10 @@ class LinkedInClient():
         return url
 
     def get_people_search_url(self, company_size, region, years_of_experience, tenure):
+
+        filters = f"filters:List((type:COMPANY_HEADCOUNT,values:List((id:{company_size}))),(type:COMPANY_HEADQUARTERS,values:List((id:{region}))),(type:YEARS_AT_CURRENT_COMPANY,values:List((id:{years_of_experience}))),(type:YEARS_OF_EXPERIENCE,values:List((id:{tenure})))),keywords:{self.keyword})"
+        url = f"{self.BASE_URL}/{self.PEOPLE_URL_PREFIX},{filters}&{self.PEOPLE_URL_SUFFIX}"
         
-        query = f"query=(keywords:{self.keyword},companySize:List({company_size}),bingGeo:(includedValues:List((id:{region}))),yearsOfExperience:List({years_of_experience}),tenureAtCurrentCompany:List({tenure})"
-        url = f"{self.BASE_URL}/{self.PEOPLE_URL_PREFIX}&{query},{self.PEOPLE_URL_SUFFIX}"
- 
         return url
     
     @backoff.on_exception(

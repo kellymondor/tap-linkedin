@@ -1,0 +1,589 @@
+{
+  "streams": [
+    {
+      "tap_stream_id": "companies",
+      "key_properties": [
+        "linkedin_id"
+      ],
+      "schema": {
+        "properties": {
+          "id": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "industry": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "employee_count": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "revenue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "flagshipCompanyUrl": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "website": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "headquarters": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "geoRegion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true
+      },
+      "stream": "companies",
+      "metadata": [
+        {
+          "metadata": {
+            "selected": null
+          },
+          "breadcrumb": []
+        }
+      ]
+    },
+    {
+      "tap_stream_id": "people",
+      "key_properties": [
+        "linkedin_id"
+      ],
+      "schema": {
+        "properties": {
+          "linkedin_id": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": false
+      },
+      "stream": "people",
+      "metadata": [
+        {
+          "metadata": {
+            "selected": null
+          },
+          "breadcrumb": []
+        }
+      ]
+    }
+  ]
+}{
+  "streams": [
+    {
+      "tap_stream_id": "companies",
+      "replication_key": "id",
+      "key_properties": [
+        "id"
+      ],
+      "schema": {
+        "properties": {
+          "id": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "website": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "location": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "headquarters": {
+            "properties": {
+              "country": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "geographicArea": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "city": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "postalCode": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "line1": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "line2": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            },
+            "type": [
+              "null",
+              "object"
+            ]
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "industry": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "employeeCount": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "employeeCountRange": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "revenue": {
+            "properties": {
+              "amount": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "currencyCode": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            },
+            "type": [
+              "null",
+              "object"
+            ]
+          },
+          "formattedRevenue": {
+            "properties": {
+              "amount": {
+                "type": [
+                  "null",
+                  "integer"
+                ]
+              },
+              "unit": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "currencyCode": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            },
+            "type": [
+              "null",
+              "object"
+            ]
+          },
+          "flagshipCompanyUrl": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "employeesSearchPageUrl": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "yearFounded": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true
+      },
+      "stream": "companies",
+      "metadata": [
+        {
+          "metadata": {
+            "selected": null
+          },
+          "breadcrumb": []
+        }
+      ]
+    },
+    {
+      "tap_stream_id": "people",
+      "replication_key": "start",
+      "key_properties": [
+        "id"
+      ],
+      "schema": {
+        "properties": {
+          "id": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "start": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "firstName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "fullName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "geoRegion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "searchRegion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "entityUrn": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "summary": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "currentPositions": {
+            "items": {
+              "properties": {
+                "companyName": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "title": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "companyUrn": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "description": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "tenureAtPosition": {
+                  "properties": {
+                    "numYears": {
+                      "type": [
+                        "null",
+                        "integer"
+                      ]
+                    },
+                    "numMonths": {
+                      "type": [
+                        "null",
+                        "integer"
+                      ]
+                    }
+                  },
+                  "type": [
+                    "null",
+                    "object"
+                  ]
+                },
+                "tenureAtCompany": {
+                  "properties": {
+                    "numYears": {
+                      "type": [
+                        "null",
+                        "integer"
+                      ]
+                    },
+                    "numMonths": {
+                      "type": [
+                        "null",
+                        "integer"
+                      ]
+                    }
+                  },
+                  "type": [
+                    "null",
+                    "object"
+                  ]
+                },
+                "startedOn": {
+                  "properties": {
+                    "month": {
+                      "type": [
+                        "null",
+                        "integer"
+                      ]
+                    },
+                    "year": {
+                      "type": [
+                        "null",
+                        "integer"
+                      ]
+                    }
+                  },
+                  "type": [
+                    "null",
+                    "object"
+                  ]
+                },
+                "companyUrnResolutionResult": {
+                  "properties": {
+                    "entityUrn": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "name": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "industry": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "location": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    }
+                  },
+                  "type": [
+                    "null",
+                    "object"
+                  ]
+                }
+              },
+              "type": [
+                "null",
+                "object"
+              ]
+            },
+            "type": [
+              "null",
+              "array"
+            ]
+          },
+          "pastPositions": {
+            "items": {
+              "properties": {
+                "endedOn": {
+                  "properties": {
+                    "month": {
+                      "type": [
+                        "null",
+                        "integer"
+                      ]
+                    },
+                    "year": {
+                      "type": [
+                        "null",
+                        "integer"
+                      ]
+                    }
+                  },
+                  "type": [
+                    "null",
+                    "object"
+                  ]
+                },
+                "startedOn": {
+                  "properties": {
+                    "month": {
+                      "type": [
+                        "null",
+                        "integer"
+                      ]
+                    },
+                    "year": {
+                      "type": [
+                        "null",
+                        "integer"
+                      ]
+                    }
+                  },
+                  "type": [
+                    "null",
+                    "object"
+                  ]
+                },
+                "companyName": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "title": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "companyUrn": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                }
+              },
+              "type": [
+                "null",
+                "object"
+              ]
+            },
+            "type": [
+              "null",
+              "array"
+            ]
+          }
+        },
+        "type": [
+          "null",
+          "object"
+        ],
+        "additionalProperties": true
+      },
+      "stream": "people",
+      "metadata": [
+        {
+          "metadata": {
+            "selected": null
+          },
+          "breadcrumb": []
+        }
+      ]
+    }
+  ]
+}

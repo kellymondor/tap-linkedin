@@ -19,6 +19,8 @@ def sync(client, config):
     currently_syncing_stream = Context.state.get('currently_syncing_stream')
     currently_syncing_query = Context.state.get('currently_syncing_query')
 
+    currently_syncing_query_company_size = None
+    currently_syncing_query_facet = None
     
     LOGGER.info(currently_syncing_stream)
     LOGGER.info(currently_syncing_query)
@@ -40,29 +42,26 @@ def sync(client, config):
         key_company_size = key_split[0]
         key_facet = int(key_split[1])
 
-        if key_company_size < currently_syncing_query_company_size:
+        if currently_syncing_query_company_size and key_company_size < currently_syncing_query_company_size:
             LOGGER.info(f"Skipping sync for: {key}:{value}.")
-        elif key_company_size == currently_syncing_query_company_size and key_facet < currently_syncing_query_facet:
+        elif currently_syncing_query_company_size and currently_syncing_query_facet and key_company_size == currently_syncing_query_company_size and key_facet < currently_syncing_query_facet:
             LOGGER.info(f"Skipping sync for: {key}:{value}.")
         else:
             LOGGER.info(f"Running sync for: {key}:{value}.")
             Context.set_state_property('currently_syncing_query', key)
             people_stream.sync(key = key, **value)
-
-            if key_facet == 87:
-                sleep()
+            sleep()
         
             if key_facet == 174:
-                sleep()
                 company_stream = CompanyStream(client)
                 company_stream.sync()
+                sleep()
 
 
 def sleep():
-    delay = random.randint(60, 300)
+    delay = random.randint(45, 90)
     LOGGER.info(f"Sleeping for {delay} seconds.")
     time.sleep(delay)
-
 
 def get_facet_combinations():
     # create all combinations for searching sales nav
@@ -81,8 +80,10 @@ def get_facet_combinations():
     # we use a set to capture company ids in the company stream context
     for key, value in COMPANY_SIZE.items():
         for idx, combination in enumerate(facet_combinations):
-            combo_dict = {"company_size": value, "region": combination[0], "years_of_experience": combination[1], "tenure": combination[2]}
-            combo_list[f"{value}-{idx}"] = combo_dict
+            # remove non-logical combinations (tenure can't be greater than years of experience)
+            if combination[1] >= combination[2]:
+                combo_dict = {"company_size": value, "region": combination[0], "years_of_experience": combination[1], "tenure": combination[2]}
+                combo_list[f"{value}-{idx}"] = combo_dict
     
     return combo_list
     
