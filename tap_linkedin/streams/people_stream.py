@@ -12,6 +12,7 @@ class PeopleStream(BaseStream):
     stream_name = 'people'
     key_properties = ["id"]
     replication_key = "start"
+    count = 0
     company_ids = set()
 
     def get_company_ids(self):
@@ -36,6 +37,8 @@ class PeopleStream(BaseStream):
             
             self.write_record(record, time_extracted)
             Context.set_bookmark(self.stream_id, self.replication_key, start + idx)
+
+            PeopleStream.count += 1
             
             if record.get("currentPositions", None):
                 for companies in record.get("currentPositions"):
@@ -72,5 +75,7 @@ class PeopleStream(BaseStream):
 
         while start:
             start = self.sync_page(url, PAGE_SIZE, region, start)
+
+        LOGGER.info(f"{PeopleStream.count} people found with GraphQL skills.")
 
 Context.stream_objects['people'] = PeopleStream

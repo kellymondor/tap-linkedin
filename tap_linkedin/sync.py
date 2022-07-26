@@ -57,7 +57,6 @@ def sync(client, config):
                 company_stream.sync()
                 sleep()
 
-
 def sleep():
     delay = random.randint(45, 90)
     LOGGER.info(f"Sleeping for {delay} seconds.")
@@ -80,10 +79,8 @@ def get_facet_combinations():
     # we use a set to capture company ids in the company stream context
     for key, value in COMPANY_SIZE.items():
         for idx, combination in enumerate(facet_combinations):
-            # remove non-logical combinations (tenure can't be greater than years of experience)
-            if combination[1] >= combination[2]:
-                combo_dict = {"company_size": value, "region": combination[0], "years_of_experience": combination[1], "tenure": combination[2]}
-                combo_list[f"{value}-{idx}"] = combo_dict
+            combo_dict = {"company_size": value, "region": combination[0], "years_of_experience": combination[1], "tenure": combination[2]}
+            combo_list[f"{value}-{idx}"] = combo_dict
     
     return combo_list
     

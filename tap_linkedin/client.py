@@ -33,7 +33,6 @@ class LinkedInClient():
         return self
 
     def __exit__(self, exception_type, exception_value, traceback):
-        
         self.__session.close()
     
     def __headers(self):
@@ -66,7 +65,7 @@ class LinkedInClient():
 
     def get_people_search_url(self, company_size, region, years_of_experience, tenure):
 
-        filters = f"filters:List((type:COMPANY_HEADCOUNT,values:List((id:{company_size}))),(type:COMPANY_HEADQUARTERS,values:List((id:{region}))),(type:YEARS_AT_CURRENT_COMPANY,values:List((id:{years_of_experience}))),(type:YEARS_OF_EXPERIENCE,values:List((id:{tenure})))),keywords:{self.keyword})"
+        filters = f"filters:List((type:COMPANY_HEADCOUNT,values:List((id:{company_size}))),(type:COMPANY_HEADQUARTERS,values:List((id:{region}))),(type:YEARS_AT_CURRENT_COMPANY,values:List((id:{tenure}))),(type:YEARS_OF_EXPERIENCE,values:List((id:{years_of_experience})))),keywords:{self.keyword})"
         url = f"{self.BASE_URL}/{self.PEOPLE_URL_PREFIX},{filters}&{self.PEOPLE_URL_SUFFIX}"
         
         return url
