@@ -26,6 +26,9 @@ def sync(client, config):
     LOGGER.info(currently_syncing_query)
     LOGGER.info(f"Starting sync...")
 
+    if currently_syncing_query == "I-174":
+        currently_syncing_query = None
+
     if currently_syncing_query:
         currently_syncing_query_split = currently_syncing_query.split("-")
         currently_syncing_query_company_size = currently_syncing_query_split[0]
