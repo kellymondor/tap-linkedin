@@ -1,7 +1,7 @@
 import singer
 from .base_stream import BaseStream
 from tap_linkedin.context import Context
-from tap_linkedin.filter_criteria import REGIONS
+from tap_linkedin.utils import sleep
 
 LOGGER = singer.get_logger()
 
@@ -23,17 +23,21 @@ class PeopleStream(BaseStream):
         else:
             pass
     
-    def sync_page(self, url, page_size, region, start):
+    def sync_page(self, url, page_size, company_size, region, years_of_experience, tenure, start):
     
         params = {"count": page_size, "start": start}
         time_extracted = singer.utils.now()
         
         response = self.client.get_request(url, params)
+        result_count = response.get('paging').get("total")
         records = response.get('elements')
         
         for idx, record in enumerate(records):
             record["id"] = int(record.get("objectUrn").replace("urn:li:member:", ""))
             record["searchRegion"] = region
+            record["searchCompanySize"] = company_size
+            record["searchYearsOfExperience"] = years_of_experience
+            record["searchTenure"] = tenure
             
             self.write_record(record, time_extracted)
             Context.set_bookmark(self.stream_id, self.replication_key, start + idx)
@@ -55,14 +59,14 @@ class PeopleStream(BaseStream):
         Context.set_bookmark(self.stream_id, self.replication_key, start)
         self.write_state()
 
-        if len(records) < page_size: 
+        if start >= result_count or len(records) == 0: 
             start = None
  
         return start
 
     def sync_records(self, **kwargs):
 
-        start = Context.get_bookmark(PeopleStream.stream_id).get(PeopleStream.replication_key, 0)
+        start = 0
         self.write_state()
 
         region = kwargs.get("region")
@@ -71,10 +75,11 @@ class PeopleStream(BaseStream):
         tenure = kwargs.get("tenure")
 
         url = self.client.get_people_search_url(company_size, region, years_of_experience, tenure)
-        start = self.sync_page(url, PAGE_SIZE, region, start)
+        start = self.sync_page(url, PAGE_SIZE, company_size, region, years_of_experience, tenure, start)
 
         while start:
-            start = self.sync_page(url, PAGE_SIZE, region, start)
+            start = self.sync_page(url, PAGE_SIZE, company_size, region, years_of_experience, tenure, start)
+            sleep(3, 10)
 
         LOGGER.info(f"{PeopleStream.count} people found with GraphQL skills.")
 

@@ -3,7 +3,6 @@ from requests.exceptions import ConnectionError, Timeout
 from tap_linkedin.exceptions import raise_for_error, LinkedInError, ReadTimeoutError, Server5xxError, LinkedInTooManyRequestsError
 
 import backoff
-import json
 import singer
 
 LOGGER = singer.get_logger()
@@ -32,11 +31,10 @@ class LinkedInClient():
         
         return self
 
-    def __exit__(self, exception_type, exception_value, traceback):
+    def __exit__(self):
         self.__session.close()
     
     def __headers(self):
-        
         headers = {}
         headers["accept"] = "*/*"
         headers["accept-language"] = "en-US,en;q=0.9"
@@ -57,15 +55,14 @@ class LinkedInClient():
 
         return headers
     
-    def get_company_url(self, linkedinId):
-        
-        url = f"{self.BASE_URL}/{self.COMPANY_URL_PREFIX}/{linkedinId}?{self.COMPANY_URL_SUFFIX}"
+    def get_company_url(self, linkedin_id):
+        url = f"{self.BASE_URL}/{self.COMPANY_URL_PREFIX}/{linkedin_id}?{self.COMPANY_URL_SUFFIX}"
         
         return url
 
     def get_people_search_url(self, company_size, region, years_of_experience, tenure):
 
-        filters = f"filters:List((type:COMPANY_HEADCOUNT,values:List((id:{company_size}))),(type:COMPANY_HEADQUARTERS,values:List((id:{region}))),(type:YEARS_AT_CURRENT_COMPANY,values:List((id:{tenure}))),(type:YEARS_OF_EXPERIENCE,values:List((id:{years_of_experience})))),keywords:{self.keyword})"
+        filters = f"filters:List((type:COMPANY_HEADCOUNT,values:List((id:{company_size}))),(type:REGION,values:List((id:{region}))),(type:YEARS_AT_CURRENT_COMPANY,values:List((id:{tenure}))),(type:YEARS_OF_EXPERIENCE,values:List((id:{years_of_experience})))),keywords:{self.keyword})"
         url = f"{self.BASE_URL}/{self.PEOPLE_URL_PREFIX},{filters}&{self.PEOPLE_URL_SUFFIX}"
         
         return url
@@ -124,6 +121,7 @@ class LinkedInClient():
             if response.status_code != 200:
                 LOGGER.error(f'Error status_code = {response.status_code}')
                 raise_for_error(response)
+            
             return response
 
         except requests.exceptions.Timeout as err:

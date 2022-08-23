@@ -1,7 +1,5 @@
-import os
-import json
 import singer
-from singer import utils
+
 from tap_linkedin.client import LinkedInClient
 from tap_linkedin.discover import discover
 from tap_linkedin.sync import sync
@@ -16,10 +14,10 @@ REQUIRED_CONFIG_KEYS = [
 
 LOGGER = singer.get_logger()
 
-@utils.handle_top_exception(LOGGER)
+@singer.utils.handle_top_exception(LOGGER)
 def main():
     # Parse command line arguments
-    args = utils.parse_args(REQUIRED_CONFIG_KEYS)
+    args = singer.utils.parse_args(REQUIRED_CONFIG_KEYS)
 
     Context.state = args.state
     
@@ -35,7 +33,7 @@ def main():
             else:
                 catalog = discover(client, args.config)
               
-            sync(client, args.config)
+            sync(client)
 
 if __name__ == "__main__":
     main()
