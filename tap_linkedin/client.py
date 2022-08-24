@@ -15,6 +15,7 @@ class LinkedInClient():
     BASE_URL = "https://www.linkedin.com"
     PEOPLE_URL_PREFIX = "sales-api/salesApiLeadSearch?q=searchQuery&query=(spellCorrectionEnabled:true"
     PEOPLE_URL_SUFFIX = "decorationId=com.linkedin.sales.deco.desktop.searchv2.LeadSearchResult-7"
+    
     COMPANY_URL_PREFIX = "sales-api/salesApiCompanies"
     COMPANY_URL_SUFFIX = f"""decoration=%28entityUrn%2Cname%2Cdescription%2Cindustry%2CemployeeCount%2CemployeeDisplayCount%2CemployeeCountRange%2Clocation%2Cheadquarters%2Cwebsite%2Crevenue%2CformattedRevenue%2CemployeesSearchPageUrl%2CflagshipCompanyUrl%29"""
 
@@ -31,7 +32,7 @@ class LinkedInClient():
         
         return self
 
-    def __exit__(self):
+    def __exit__(self, exception_type, exception_value, traceback):
         self.__session.close()
     
     def __headers(self):
