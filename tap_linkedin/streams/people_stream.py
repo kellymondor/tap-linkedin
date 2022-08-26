@@ -5,7 +5,7 @@ from tap_linkedin.utils import sleep
 
 LOGGER = singer.get_logger()
 
-PAGE_SIZE = 100
+PAGE_SIZE = 25
 
 class PeopleStream(BaseStream):
     stream_id = 'people'
@@ -79,7 +79,7 @@ class PeopleStream(BaseStream):
 
         while start:
             start = self.sync_page(url, PAGE_SIZE, company_size, region, years_of_experience, tenure, start)
-            sleep(3, 10)
+            sleep(7, 15)
 
         LOGGER.info(f"{PeopleStream.count} people found with GraphQL skills.")
 
